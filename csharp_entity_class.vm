@@ -23,7 +23,7 @@ namespace $namespace
 		{
 		}
 
-$csharp.toStringMethod( $entity, 4 )
+$csharp.toStringMethod( $entity, 2 )
 	}
 }
 
