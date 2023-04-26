@@ -1,5 +1,5 @@
 ${SHARP} Python class for entity ${entity.name} 
-${SHARP} Created on $today.date ( Time $today.time )
+${SHARP} Created on $now.date ( $now.time )
 
 
 ${SHARP}

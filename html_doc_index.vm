@@ -2,7 +2,7 @@
 <html>
 <!--
  * Index for all HTML pages
- * Created on $today.date ( Time $today.time )
+ * Created on $now.date ( $now.time )
  * Target Name     : "$target.targetName"
  * Target Template : "$target.template"
  * Target Entity   : "$target.entityName"  ( entityName is void because this template is "multi-targets" )

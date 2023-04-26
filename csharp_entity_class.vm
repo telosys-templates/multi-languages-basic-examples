@@ -5,6 +5,7 @@
 #set( $namespace = "MyNameSpace" )
 // Target language is $env.language
 using System;
+#nullable enable
 
 namespace $namespace
 {
@@ -22,6 +23,13 @@ namespace $namespace
 		public ${entity.name}() 
 		{
 		}
+		// Constructor with PK fields
+		public ${entity.name}($fn.argumentsListWithType($entity.keyAttributes)) : this()
+		{
+#foreach( $attribute in $entity.keyAttributes )
+			this.${attribute.name} = ${attribute.name} ;
+#end
+		}
 
 $csharp.toStringMethod( $entity, 2 )
 	}
@@ -32,9 +40,13 @@ public class Program
 {
 	public static void Main()
 	{
-		Console.WriteLine("Hello World, we will test the $entity.name class");
-		${namespace}.${entity.name} x = new ${namespace}.${entity.name}();
-		string s = x.ToString();
-		Console.WriteLine($"Instance : '{s}'");
+#set( $fullClassName = "${namespace}.${entity.name}" )
+		Console.WriteLine("Hello World, this is a test with ${entity.name} class");
+		$fullClassName x ;
+		x = new ${fullClassName}();
+		Console.WriteLine("Instance 1 : " + x.ToString());
+#set( $values = $fn.buildValues($entity.keyAttributes, 100) )		
+		x = new ${fullClassName}($values.allValues);
+		Console.WriteLine("Instance 2 : " + x.ToString());
 	}
 }
