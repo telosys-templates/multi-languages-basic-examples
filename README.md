@@ -1,7 +1,17 @@
 # Multi-languages basic examples
 
-A set of basic templates usable to generate various examples (Java, C#, Python, PHP, HTML, XML).
+This bundle contains only simple examples to illustrate the basic principles of the generator with different target languages.
 
-The generated files give you several examples to understand how the generation works and how you can generate your own files in any language.
+The purpose of this bundle is simply to allow users to understand how code generation works and how you can generate your own files in any language.
 
+The templates in this bundle are only a starting point to discover Telosys, they are not intended to be used as is for a real project.
 
+Examples are provided for the following languages : 
+
+- C#
+- HTML
+- Java
+- PHP
+- Python
+
+The generated files are located in the "examples" folder with a subfolder for each language

@@ -5,18 +5,20 @@
 #set( $namespace = "MyNameSpace" )
 // Target language is $env.language
 using System;
-#nullable enable
+// #nullable enable
 
 namespace $namespace
 {
 	public class $entity.name
 	{
+		// Id or Primary Key
 #foreach( $attribute in $entity.keyAttributes )
-		public $attribute.formattedType(10) $attribute.formattedName(12) { get; set; } // Id or Primary Key
+		public $attribute.formattedType(10) $attribute.formattedName(12) { get; set; } = $attribute.ini ;
 #end
-
+		
+		// Other attributes 
 #foreach( $attribute in $entity.nonKeyAttributes )
-		public $attribute.formattedType(10) $attribute.formattedName(12) { get; set; } 
+		public $attribute.formattedType(10) $attribute.formattedName(12) { get; set; } = $attribute.ini ;
 #end
 
 		// Default constructor
@@ -30,7 +32,8 @@ namespace $namespace
 			this.${attribute.name} = ${attribute.name} ;
 #end
 		}
-
+		
+## $csharp is a utility object specialized for C# code generation
 $csharp.toStringMethod( $entity, 2 )
 	}
 }
@@ -41,7 +44,7 @@ public class Program
 	public static void Main()
 	{
 #set( $fullClassName = "${namespace}.${entity.name}" )
-		Console.WriteLine("Hello World, this is a test with ${entity.name} class");
+		Console.WriteLine("Hello World, let's play with ${entity.name} class");
 		$fullClassName x ;
 		x = new ${fullClassName}();
 		Console.WriteLine("Instance 1 : " + x.ToString());
