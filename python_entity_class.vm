@@ -1,6 +1,6 @@
 ${SHARP} Python class for entity ${entity.name} 
 ${SHARP} Created on $now.date ( $now.time )
-
+#set( $env.language = 'Python' )
 
 ${SHARP}
 ${SHARP} This class defines the ${entity.name} object 
@@ -11,9 +11,19 @@ class ${entity.name}:
 	${SHARP} Default constructor.
 	def __init__(self):
 		pass
-     
-	def __init__(self #foreach( $attribute in $entity.attributes ),$attribute.name #end):
-		${SHARP} super(${entity.name}Data,self).__init__();
-		#foreach( $attribute in $entity.attributes )
-self.$attribute.name = $attribute.name;
-		#end
+
+	${SHARP} Constructor with PK fields
+	def __init__(self, $fn.argumentsList($entity.keyAttributes)):
+		${SHARP} PK attributes
+#foreach( $attribute in $entity.keyAttributes )
+		self.$attribute.name = $attribute.name
+#end
+		${SHARP} Other attributes
+#foreach( $attribute in $entity.nonKeyAttributes )
+		self.$attribute.name = $attribute.ini
+#end
+
+print("Hello world! Let's play with ${entity.name} class" )
+#set( $values = $fn.buildValues($entity.keyAttributes, 100) )
+x = ${entity.name}($values.allValues)
+print("AllTypes :", x)
