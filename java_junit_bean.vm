@@ -34,7 +34,10 @@ public class ${entity.name}Test
 #if ( $value == "null" )
 		Assert.assertNull(${beanVar}.${attribute.getter}());
 #else
-		Assert.assertEquals( $value, ${beanVar}.${attribute.getter}() ) ;
+#set ($delta = "" )
+#if ( $attribute.isFloatType()  )#set ($delta = ", 0.000001F" )#end
+#if ( $attribute.isDoubleType() )#set ($delta = ", 0.000001D" )#end
+		Assert.assertEquals( $value, ${beanVar}.${attribute.getter}() $delta ) ;
 #end
 
 #end

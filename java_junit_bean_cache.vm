@@ -24,9 +24,7 @@ import org.junit.Test;
 #set ( $values = $fn.buildValues($entity.attributes, 1) )
 public class ${cacheClass}Test 
 {
-	//protected static final java.util.Date now = new java.util.Date();
-
-	private final static void populate(${entity.name} ${beanVar}) {
+	private static final void populate(${entity.name} ${beanVar}) {
 #foreach( $attribute in $entity.attributes )
 		${beanVar}.${attribute.setter}( $values.getValue($attribute.name) ) ;
 #end

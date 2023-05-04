@@ -24,12 +24,14 @@ public class $entity.name implements Serializable
 {
     private static final long serialVersionUID = 1L;
 
-#foreach( $field in $entity.keyAttributes )
-    private $field.formattedType(10) $field.formattedName(12) #if($field.hasInitialValue())= ${field.initialValue} #end; // Id or Primary Key
+#foreach( $attribute in $entity.keyAttributes )
+##    private $attribute.formattedType(10) $attribute.formattedName(12) #if($attribute.hasInitialValue())= ${attribute.initialValue} #end; // Id or Primary Key
+    private $attribute.formattedType(10) $attribute.formattedName(12) = $attribute.ini ; // Id or Primary Key
 #end
 
-#foreach( $field in $entity.nonKeyAttributes )
-    private $field.formattedType(10) $field.formattedName(12) #if($field.hasInitialValue())= ${field.initialValue} #end;
+#foreach( $attribute in $entity.nonKeyAttributes )
+##    private $attribute.formattedType(10) $attribute.formattedName(12) #if($attribute.hasInitialValue())= ${attribute.initialValue} #end;
+    private $attribute.formattedType(10) $attribute.formattedName(12) = $attribute.ini ;
 #end
 
     /**
@@ -40,57 +42,57 @@ public class $entity.name implements Serializable
     }
     
     //----------------------------------------------------------------------
-    // GETTER(S) & SETTER(S) FOR ID OR PRIMARY KEY 
+    // GETTER(S) & SETTER(S) FOR ID ATTRIBUTES (PRIMARY KEY )
     //----------------------------------------------------------------------
-#foreach( $field in $entity.keyAttributes )
-#if ( $field.setter )    
+#foreach( $attribute in $entity.keyAttributes )
+#if ( $attribute.setter )    
     /**
-     * Set the "$field.name" field value
-#if ( $field.databaseName )     * This field is mapped on the database column "$field.databaseName" ( type "$field.databaseType", NotNull : $field.isDatabaseNotNull() ) 
+     * Set the "$attribute.name" attribute value
+#if ( $attribute.databaseName )     * This attribute is mapped on the database column "$attribute.databaseName" ( type "$attribute.databaseType", NotNull : $attribute.isDatabaseNotNull() ) 
 #end
-     * @param $field.name
+     * @param $attribute.name
      */
-	public void ${field.setter}( $field.type $field.name ) {
-        this.$field.name = $field.name ;
+	public void ${attribute.setter}( $attribute.type $attribute.name ) {
+        this.$attribute.name = $attribute.name ;
     }
 #end
-#if ( $field.getter )    
+#if ( $attribute.getter )    
     /**
-     * Get the "$field.name" field value
-#if ( $field.databaseName )     * This field is mapped on the database column "$field.databaseName" ( type "$field.databaseType", NotNull : $field.isDatabaseNotNull() ) 
+     * Get the "$attribute.name" attribute value
+#if ( $attribute.databaseName )     * This attribute is mapped on the database column "$attribute.databaseName" ( type "$attribute.databaseType", NotNull : $attribute.isDatabaseNotNull() ) 
 #end
-     * @return the field value
+     * @return the attribute value
      */
-	public $field.type ${field.getter}() {
-        return this.$field.name;
+	public $attribute.type ${attribute.getter}() {
+        return this.$attribute.name;
     }
 #end
 #end
 
     //----------------------------------------------------------------------
-    // GETTER(S) & SETTER(S) FOR OTHER DATA FIELDS
+    // GETTER(S) & SETTER(S) FOR OTHER DATA ATTRIBUTES
     //----------------------------------------------------------------------
-#foreach( $field in $entity.nonKeyAttributes )
-#if ( $field.setter )
+#foreach( $attribute in $entity.nonKeyAttributes )
+#if ( $attribute.setter )
     /**
-     * Set the "$field.name" field value
-#if ( $field.databaseName )     * This field is mapped on the database column "$field.databaseName" ( type "$field.databaseType", NotNull : $field.isDatabaseNotNull() ) 
+     * Set the "$attribute.name" attribute value
+#if ( $attribute.databaseName )     * This attribute is mapped on the database column "$attribute.databaseName" ( type "$attribute.databaseType", NotNull : $attribute.isDatabaseNotNull() ) 
 #end
-     * @param $field.name
+     * @param $attribute.name
      */
-    public void ${field.setter}( $field.type $field.name ) {
-        this.$field.name = $field.name;
+    public void ${attribute.setter}( $attribute.type $attribute.name ) {
+        this.$attribute.name = $attribute.name;
     }
 #end
-#if ( $field.getter )
+#if ( $attribute.getter )
     /**
-     * Get the "$field.name" field value
-#if ( $field.databaseName )     * This field is mapped on the database column "$field.databaseName" ( type "$field.databaseType", NotNull : $field.isDatabaseNotNull() ) 
+     * Get the "$attribute.name" attribute value
+#if ( $attribute.databaseName )     * This attribute is mapped on the database column "$attribute.databaseName" ( type "$attribute.databaseType", NotNull : $attribute.isDatabaseNotNull() ) 
 #end
-     * @return the field value
+     * @return the attribute value
      */
-    public $field.type ${field.getter}() {
-        return this.$field.name;
+    public $attribute.type ${attribute.getter}() {
+        return this.$attribute.name;
     }
 #end
 

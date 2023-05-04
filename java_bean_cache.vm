@@ -9,7 +9,7 @@ package org.examples;
 ## package ${target.javaPackageFromFolder(${SRC})};
 #checkId($entity)
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Map;
 
 ## import ${ROOT_PKG}.basic.bean.${entity.name} ;
@@ -25,18 +25,18 @@ import $import;
  */
 public class ${entity.name}Cache
 {
-	private final static Map<String,${entity.name}> cache = new Hashtable<String,${entity.name}>() ;
+	private static final Map<String,${entity.name}> cache = new HashMap<>() ;
 	
 #set ( $keyFields = $entity.keyAttributes )
 	/**
-	 * Build the cache key from the Primary Key field(s)
-#foreach( $field in $keyFields ) 
-     * @param ${field.name} 
+	 * Build the cache key from the Primary Key attribute(s)
+#foreach( $attribute in $keyFields ) 
+     * @param ${attribute.name} 
 #end	 
 	 * @return the key
 	 */
-	private final static String getKey( $fn.argumentsListWithType($keyFields) ) {
-		return "" #foreach( $field in $keyFields ) + ${field.name} #end ;
+	private static final String getKey( $fn.argumentsListWithType($keyFields) ) {
+		return "" #foreach( $attribute in $keyFields ) + ${attribute.name} #end ;
 	}
 
 	/**
@@ -44,30 +44,30 @@ public class ${entity.name}Cache
 	 * @param ${entity.name} instance to be stored
 	 */
 #set ( $paramName = ${fn.uncapitalize($entity.name)} )
-	public final static void put${entity.name}(${entity.name} ${paramName} ) {
+	public static final void put${entity.name}(${entity.name} ${paramName} ) {
 		String key = getKey( $fn.argumentsListWithGetter( ${paramName}, $keyFields) ) ;
 		cache.put(key, ${fn.uncapitalize($entity.name)} );
 	}
 	
 	/**
 	 * Get the ${entity.name} instance for the given primary key
-#foreach( $field in $keyFields ) 
-     * @param ${field.name} 
+#foreach( $attribute in $keyFields ) 
+     * @param ${attribute.name} 
 #end	 
 	 * @return the ${entity.name} instance (or null if none)
 	 */
-	public final static ${entity.name} get${entity.name}( $fn.argumentsListWithType($keyFields) ) {
+	public static final ${entity.name} get${entity.name}( $fn.argumentsListWithType($keyFields) ) {
 		String key = getKey( $fn.argumentsList($keyFields) ) ;
 		return cache.get(key);
 	}
 
 	/**
 	 * Removes the ${entity.name} associated with the given primary key
-#foreach( $field in $keyFields ) 
-     * @param ${field.name} 
+#foreach( $attribute in $keyFields ) 
+     * @param ${attribute.name} 
 #end	 
 	 */
-	public final static void remove${entity.name} ( $fn.argumentsListWithType($keyFields) ) {
+	public static final void remove${entity.name} ( $fn.argumentsListWithType($keyFields) ) {
 		String key = getKey( $fn.argumentsList($keyFields) ) ;
 		cache.remove(key);
 	}
@@ -77,7 +77,7 @@ public class ${entity.name}Cache
 	 * @param ${entity.name} instance to be removed
 	 */
 #set ( $paramName = ${fn.uncapitalize($entity.name)} )
-	public final static void remove${entity.name} (${entity.name} ${paramName} ) { 
+	public static final void remove${entity.name} (${entity.name} ${paramName} ) { 
 		String key = getKey( $fn.argumentsListWithGetter( ${paramName}, $keyFields) ) ;
 		cache.remove(key);
 	}
