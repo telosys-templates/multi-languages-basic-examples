@@ -13,5 +13,6 @@ Examples are provided for the following languages :
 - Java
 - PHP
 - Python
+- Scala
 
 The generated files are located in the "examples" folder with a subfolder for each language
