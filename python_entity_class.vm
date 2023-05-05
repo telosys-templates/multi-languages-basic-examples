@@ -23,7 +23,16 @@ class ${entity.name}:
 		self.$attribute.name = $attribute.ini
 #end
 
+	${SHARP} Standard function for string representation of the object
+	def __str__(self):
+		return ( '${entity.name}[' 
+#foreach( $attribute in $entity.attributes )
+#if ($foreach.count > 1 )#set($sep="|") #else #set($sep="") #end
+		+ '${sep}${attribute.name}:' + str(self.${attribute.name})
+#end
+		+ ']')
+
 print("Hello world! Let's play with ${entity.name} class" )
 #set( $values = $fn.buildValues($entity.keyAttributes, 100) )
 x = ${entity.name}($values.allValues)
-print("AllTypes :", x)
+print("${entity.name} : ", x)
