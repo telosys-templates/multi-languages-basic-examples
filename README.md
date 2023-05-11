@@ -8,6 +8,7 @@ The templates in this bundle are only a starting point to discover Telosys, they
 
 Examples are provided for the following languages : 
 
+- C++
 - C#
 - HTML
 - Java
