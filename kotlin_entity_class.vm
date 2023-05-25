@@ -6,8 +6,6 @@
 ##--------------------------------------------------------------------------------------------------
 #set($env.language = "Kotlin")
 #set($ROOT_PKG = "org.example") ## just for demo, supposed to be set in project configuration
-## Data fields = fields not in Primary Key and not in selected Links    
-#set( $dataFields = $entity.getAttributesByCriteria( $const.NOT_KEY, $const.NOT_IN_SELECTED_LINKS ) )
 ##--------------------------------------------------------------------------------------------------
 
 package ${ROOT_PKG}.domain
